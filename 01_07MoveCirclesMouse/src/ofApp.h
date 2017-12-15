@@ -22,8 +22,10 @@ public:
     void gotMessage(ofMessage msg);
     
     //可変長配列(vector)を定義
-    vector<ofVec2f> location; //位置ベクトル
-    vector<ofVec2f> velocity; //速度ベクトル
+    vector<ofVec3f> location; //位置ベクトル
+    vector<ofVec3f> velocity; //速度ベクトル
+	vector<ofColor> color; //カラー
+
     //上限値を決める
     int max_num;
 };

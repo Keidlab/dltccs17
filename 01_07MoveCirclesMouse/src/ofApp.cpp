@@ -21,20 +21,29 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
     //NUM回くりかえし
-    for (int i = 0; i < location.size(); i++) {
-        //計算した位置に円を描画
-        ofSetColor(15, 127, 255); //円の色
-        ofDrawCircle(location[i], 5); //半径5の円を描画
-        ofDrawCircle(location[i], 5); //半径5の円を描画
-        
-        //画面の端でバウンドするように
-        if (location[i].x < 0 || location[i].x > ofGetWidth()) {
-            velocity[i].x *= -1; //横向きの速度を反転(バウンド)
-        }
-        if (location[i].y < 0 || location[i].y > ofGetHeight()) {
-            velocity[i].y *= -1; //横向きの速度を反転(バウンド)
-        }
-    }
+	for (int i = 0; i < location.size(); i++) {
+		//計算した位置に円を描画
+		ofSetColor(255); //円の色
+		ofBeginShape();
+		for (int i = 0; i < location.size(); i++) {
+			ofVertex(location[i]);
+			// ofCurveVertexで滑らかな曲線に
+
+			//画面の端でバウンドするように
+			if (location[i].x < 0 || location[i].x > ofGetWidth()) {
+				velocity[i].x *= -1; //横向きの速度を反転(バウンド)
+			}
+			if (location[i].y < 0 || location[i].y > ofGetHeight()) {
+				velocity[i].y *= -1; //横向きの速度を反転(バウンド)
+			}
+
+			if (location[i].z < -ofGetWidth() || location[i].z > ofGetWidth()) {
+				velocity[i].z *= -1; //横向きの速度を反転(バウンド)
+			}
+
+		}
+	}
+	ofEndShape();
     
     //現在の物体の数を表示
     ofSetColor(255);
@@ -59,8 +68,12 @@ void ofApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
     //新規に位置ベクトルと速度ベクトルを生成し、配列に追加
-    location.push_back(ofVec2f(x, y));
-    velocity.push_back(ofVec2f(ofRandom(-2, 2), ofRandom(-2, 2)));
+    location.push_back(ofVec3f(x, y));
+
+	velocity.push_back(ofVec3f(	ofRandom(-2, 2),
+								ofRandom(-2, 2), 
+								ofRandom(-2, 2))
+													);
     
     //もし上限値を超えたら、先頭の要素を削除する
     if(location.size() > max_num){

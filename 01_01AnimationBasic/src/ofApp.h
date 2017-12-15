@@ -20,7 +20,14 @@ public:
     void windowResized(int w, int h);
     void dragEvent(ofDragInfo dragInfo);
     void gotMessage(ofMessage msg);
+
+	static const int num = 500; //配列の時はstatic constとしないといけない。定まった１００という数を入れたいならこうする。
+	ofVec3f location[num]; //位置 緑のクラスとオブジェクト。xとかはその中のプロパティ。.lotateとかはメソッド
+	ofVec3f velocity[num]; //速度
     
-    float locationX; // X座標の位置
-    float locationY; // Y座標の位置
+//    float locationX; // X座標の位置
+//    float locationY; // Y座標の位置
 };
+
+	//Light生成
+ofLight Light;

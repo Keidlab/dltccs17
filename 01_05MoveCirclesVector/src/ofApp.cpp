@@ -40,13 +40,14 @@ void ofApp::draw(){
     }
     
     //現在の物体の数を表示
-    ofSetColor(255);
-    ofDrawBitmapString("num = " + ofToString(location.size()), 20, 20);
+	ofSetColor(255);
+	ofDrawBitmapString("Ball Count =" + ofToString(location.size()), 10, 10);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-    
+	location.clear;
+	velocity.clear;
 }
 
 //--------------------------------------------------------------
